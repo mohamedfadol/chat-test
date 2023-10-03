@@ -16,22 +16,22 @@ use App\Http\Controllers\ChatController;
 */
 
 Route::get('/', function () {
-    // \Artisan::call('config:cache');
-    // \Artisan::call('cache:clear');
-    // \Artisan::call('route:clear');
-    // \Artisan::call('config:clear');
+    \Artisan::call('config:cache');
+    \Artisan::call('cache:clear');
+    \Artisan::call('route:clear');
+    \Artisan::call('config:clear');
 
-    // if (broadcast(new WebsocketEvent('hello from route'))) {
-    //     return 'ok';
-    // }
-    // broadcast(new WebsocketEvent('hello from route'));
+    if (broadcast(new WebsocketEvent('hello from route'))) {
+        return 'ok';
+    }
+    broadcast(new WebsocketEvent('hello from route'));
     return view('welcome');
 });
 
 Route::get('chat', [App\Http\Controllers\ChatController::class,'index']);
 Route::get('getMessages', [App\Http\Controllers\ChatController::class,'getMessages']);
 Route::post('postMessages', [App\Http\Controllers\ChatController::class,'postMessages']);
-    
+
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth'])->name('dashboard');

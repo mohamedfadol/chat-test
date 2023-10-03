@@ -11,12 +11,12 @@
                         </li>
                     </ul>
                 </div>
-                <input 
+                <input
                         @keydown="sendTypingEvent"
                         @keyup.enter="sendMessage"
-                        v-model="newMessage" 
-                        type="text" 
-                        name="message" 
+                        v-model="newMessage"
+                        type="text"
+                        name="message"
                         placeholder="Enter message" class="form-control">
             </div>
             <span class="text-muted" v-if="activeUser"> {{activeUser.name}} is typing...</span>
@@ -29,14 +29,14 @@
                         <li class="p-2" v-for="(user, index) in users" :key="index">
                             {{ user.name}}
                         </li>
-                        
+
                     </ul>
                 </div>
             </div>
         </div>
     </div>
 </template>
-  
+
 <script>
 import axios from 'axios';
 
@@ -75,7 +75,7 @@ import axios from 'axios';
       },
         methods: {
             fetchMessages(){
-                axios.get('getMessages').then(response => {
+                axios.get('api/getMessages').then(response => {
                 this.messages = response.data
             });
         },
@@ -84,7 +84,7 @@ import axios from 'axios';
                 user: this.user,
                 message: this.newMessage
             });
-            axios.post('postMessages',{message: this.newMessage});
+            axios.post('api/postMessages',{message: this.newMessage});
             this.newMessage = '';
         },
         sendTypingEvent(){
